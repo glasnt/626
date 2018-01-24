@@ -137,7 +137,7 @@ def color_cell(rgb, icon, hardborder=False, thread=False):
 
 @click.command()
 @click.argument('image')
-@click.option('--palette', '-p', default="wool", help='Choices: wool, floss. Default: wool')
+@click.option('--palette', '-p', default="wool", help='Choices: wool, floss, alpaca. Default: wool')
 @click.option('--scale', '-s', default=1, help='Rescale factor. Default: 1')
 @click.option('--colours', '-c', default=256, help='Limit palette to N colors. Default: 256')
 @click.option('--no-open', '-n', is_flag=True, default=False, help="Don't auto-open result file")
