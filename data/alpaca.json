@@ -1,0 +1,13 @@
+[
+{"Name": "White", "Code": "WT", "Hex": "f9f7f1", "RGB": [249, 247, 241]},
+{"Name": "Light Fawn", "Code": "LF", "Hex": "f6dc98", "RGB": [246, 220, 152]},
+{"Name": "Medium Fawn", "Code": "MF", "Hex": "f3ce75", "RGB": [243, 206, 117]},
+{"Name": "Dark Fawn", "Code": "DF", "Hex": "cd9d37", "RGB": [205, 157, 55]},
+{"Name": "Light Brown", "Code": "LB", "Hex": "dc9c56", "RGB": [220, 156, 86]},
+{"Name": "Medium Brown", "Code": "MB", "Hex": "c28142", "RGB": [194, 129, 66]},
+{"Name": "Dark Brown", "Code": "DB", "Hex": "914f12", "RGB": [145, 79, 18]},
+{"Name": "Light Grey", "Code": "LG", "Hex": "d7cecb", "RGB": [215, 206, 203]},
+{"Name": "Medium Grey", "Code": "MG", "Hex": "c0b3ae", "RGB": [192, 179, 174]},
+{"Name": "Dark Grey", "Code": "DG", "Hex": "917b73", "RGB": [145, 123, 115]},
+{"Name": "True Black", "Code": "BK", "Hex": "361f0e", "RGB": [54, 31, 14]}
+]

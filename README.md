@@ -3,6 +3,7 @@
 Ih. 
 
 
+
 ```
 pyenv local 3.6.3
 virtualenv venv
@@ -11,3 +12,7 @@ pip install -r requirements.txt
 ./ih test_image.png -s2
 ```
 
+
+Now with added alpaca
+
+Pending proper documentation. 

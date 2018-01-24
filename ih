@@ -11,15 +11,12 @@ STARS = ['✚', '✽', '※', '✷', '❐', '❄', '✔', '◀', '⊐', '♠', '
 
 TRANSPARENCY = (255, 255, 255)
 
-with open("data/dmc.json") as w:
-    DMC = json.load(w)
-
 def rotate(im):
     """Given our pixel walking uses inverted axes, rotate now."""
     return im.transpose(Image.FLIP_TOP_BOTTOM).transpose(Image.ROTATE_270)
 
 
-def recolor(origimage, palettename, colorlimit):
+def recolor(origimage, PALETTE, colorlimit):
     """Given a Pillow Image, a pallette, and a colour limit; re-color"""
 
     ##optional transparency fix
@@ -29,7 +26,7 @@ def recolor(origimage, palettename, colorlimit):
         bg.paste(origimage, mask=alpha)
         origimage = bg
 
-    palettedata = sum([x['RGB'] for x in DMC], [])[:256] ## NOTE Pillow Limitation
+    palettedata = sum([x['RGB'] for x in PALETTE], [])[:256] ## NOTE Pillow Limitation
 
     palimage = Image.new('P', (16, 16))
     palimage.putpalette(palettedata)
@@ -49,12 +46,12 @@ def rgb2hex(pix):
     r, g, b = pix
     return '#{:02x}{:02x}{:02x}'.format(r, g, b)
 
-
-def thread_name(rgb, palette):
+def thread_name(rgb, PALETTE):
+    
     """Given an RGB and a palette; return the thread name and code"""
-    for x in DMC:
+    for x in PALETTE:
         if tuple(x['RGB']) == rgb:
-            return (x['ColorName'], x[palette])
+            return (x['Name'], x['Code'])
     else:
         return (str(rgb), '??')
 
@@ -64,7 +61,7 @@ def rescale(im, scale):
     return im.resize((int(im.width/scale), int(im.height/scale)))
 
 
-def chart(im, palette, thread):
+def chart(im, palette_name, PALETTE, thread):
     """Given that image, do the html thang"""
     histo = sorted(im.getcolors())
 
@@ -74,8 +71,10 @@ def chart(im, palette, thread):
     with open("styling.css") as s:
         html.append("<style>" + "".join(s.readlines()) + "</style>")
 
+    stitch_type = "wool" # TODO Fix
+
     if thread:
-        html.append("<style>.cross_cell { background-image: url('../img/%s.png'); background-size: cover; }" % palette)
+        html.append("<style>.cross_cell { background-image: url('../img/%s.png'); background-size: cover; }" % stitch_type)
         html.append(".color_cell { box-shadow: none }</style>")
 
     for idx, x in enumerate(histo):
@@ -83,12 +82,12 @@ def chart(im, palette, thread):
         legend[h] = STARS[idx % len(STARS)]
 
     html.append('<table><tr><td class="zztop"><table class="legend">')
-    html.append('<tr><td>X</td><td># sts</td><td>{} code</td><td>{} name</td></tr>'.format(palette, palette))
+    html.append('<tr><td>X</td><td># sts</td><td>{} code</td><td>{} name</td></tr>'.format(palette_name, palette_name))
 
     for idx, h in enumerate(reversed(histo)):
         count, rgb = h
         color = rgb2hex(rgb)
-        name, code = thread_name(rgb, palette)
+        name, code = thread_name(rgb, PALETTE)
         
         html.append('<tr><td style="padding:0">' + color_cell(rgb, legend[color], thread=False) + '</td><td>{}</td><td>{}</td><td>{}</td><tr>'.format(count, code, name))
 
@@ -147,10 +146,15 @@ def generate_chart(image, palette, scale, colours, no_open, thread):
     """Given a image filename, and optional parameters; generate a chart"""
     im = Image.open(image)
 
+    with open("data/" + palette + ".json") as f:
+        PALETTE = json.load(f)
+
+
+
     im = rescale(im, scale)
-    im = recolor(im, palette, colours)
+    im = recolor(im, PALETTE, colours)
     im = rotate(im) 
-    chart_page = chart(im, palette, thread)
+    chart_page = chart(im, palette, PALETTE, thread)
 
     outfile = 'output/{}.html'.format("_".join(image.split("/")[-1].split(".")[:-1]))
 
