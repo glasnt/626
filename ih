@@ -158,7 +158,7 @@ def generate_chart(image, palette, scale, colours, no_open, thread):
 
     outfile = 'output/{}.html'.format("_".join(image.split("/")[-1].split(".")[:-1]))
 
-    with open(outfile, 'w') as f:
+    with open(outfile, 'w', encoding='utf-8') as f:
         f.write(chart_page)
     
     if no_open:
