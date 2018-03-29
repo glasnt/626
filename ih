@@ -9,6 +9,9 @@ from PIL import Image
 
 STARS = ['✚', '✽', '※', '✷', '❐', '❄', '✔', '◀', '⊐', '♠', '★', '»', '✿', '⟘', '❦', '⟒', '❦', '⚉', '♣', '▷', '♦', '×', '«', '△', '⊔', '➤', '⚑', '◼', '⬇', '✭', '⧓', '❤', '✤', '⟙', '✾', '∀', '⊕', '♥', '⬆', '⚇', '◼', '✰']
 
+PALETTES = ["wool","alpaca","floss"]
+PALETTE_OVERRIDE = {"🧵": "floss", "🦙": "alpaca", "🧶": "wool"}
+
 TRANSPARENCY = (255, 255, 255)
 
 def rotate(im):
@@ -135,7 +138,7 @@ def color_cell(rgb, icon, hardborder=False, thread=False):
 
 @click.command()
 @click.argument('image')
-@click.option('--palette', '-p', default="wool", help='Choices: wool, floss, alpaca. Default: wool')
+@click.option('--palette', '-p', default="wool", help='Choices: %s. Default: wool' % ", ".join(PALETTES))
 @click.option('--scale', '-s', default=1, help='Rescale factor. Default: 1')
 @click.option('--colours', '-c', default=256, help='Limit palette to N colors. Default: 256')
 @click.option('--no-open', '-n', is_flag=True, default=False, help="Don't auto-open result file")
@@ -144,10 +147,15 @@ def generate_chart(image, palette, scale, colours, no_open, thread):
     """Given a image filename, and optional parameters; generate a chart"""
     im = Image.open(image)
 
+    if palette in PALETTE_OVERRIDE.keys():
+        palette = PALETTE_OVERRIDE[palette]
+
+    if palette not in PALETTES:
+        print("Invalid palette: %s. Choices: %s" % (palette, ", ".join(PALETTES)))
+        return
+
     with open("data/" + palette + ".json") as f:
         PALETTE = json.load(f)
-
-
 
     im = rescale(im, scale)
     im = recolor(im, PALETTE, colours)
