@@ -71,10 +71,8 @@ def chart(im, palette_name, PALETTE, thread):
     with open("styling.css") as s:
         html.append("<style>" + "".join(s.readlines()) + "</style>")
 
-    stitch_type = "wool" # TODO Fix
-
     if thread:
-        html.append("<style>.cross_cell { background-image: url('../img/%s.png'); background-size: cover; }" % stitch_type)
+        html.append("<style>.cross_cell { background-image: url('../img/%s.png'); background-size: cover; }" % palette_name)
         html.append(".color_cell { box-shadow: none }</style>")
 
     for idx, x in enumerate(histo):
