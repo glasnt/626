@@ -33,8 +33,8 @@ table {
     line-height: 30px;
     height: 30px; 
     width: 30px;
-    box-shadow:inset 0px 0px 0px 0.5px #000;
+    box-shadow: inset 0px 0px 0px 1px black; 
+  /*  border-bottom: 1px solid black; 
+    border-right: 1px solid black; */
 }
-
-.hardborder { "; box-shadow:inset 0px 0px 0px 4px #f00;" }
-.normalborder {"; box-shadow:inset 0px 0px 0px 0.5px #000;" }
+.center { box-shadow:inset 0px 0px 0px 4px #f00;}
