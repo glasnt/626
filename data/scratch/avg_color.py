@@ -15,16 +15,16 @@ fn = sys.argv[1]
 im = Image.open(fn)
 color = avg_color(im)
 with open(f"{fn}.html", "w") as f:
-    f.write(f"""
-            <span><img src='{fn}'></span>
+    html = (f"""
             <span style='
                 height: {im.height}; 
-                width: {im.width};
+                width: {im.width * 2};
                 background-color: rgb{color};
-                text-align: center;
-                display: block;
+                display: inline-block;
             '>
-            {color}
+            <img src='{fn}'>
+            <span style='float: right'>{color}</span>
             </span>
             """)
-
+    f.write(html)
+    print(html)
