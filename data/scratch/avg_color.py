@@ -26,5 +26,5 @@ with open(f"{fn}.html", "w") as f:
             <span style='float: right'>{color}</span>
             </span>
             """)
-    f.write(html)
+    #    f.write(html)
     print(html)

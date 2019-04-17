@@ -17,15 +17,17 @@ for i in $(ls DMC_TAPESTRY_WOOL/*.jpg | grep -v OUT); do python avg_color.py $i 
 open results.html
 ```
 
-## `pdf-parser.py`
+## `color-csv-parser.py`
 
-A generic pdf parser method, using tabular ([reference](https://blog.chezo.uno/tabula-py-extract-table-from-pdf-into-python-dataframe-6c7acfa5f302))
+Combines: 
+
+* A generic pdf parser method, using tabular ([reference](https://blog.chezo.uno/tabula-py-extract-table-from-pdf-into-python-dataframe-6c7acfa5f302))
+
+and
+
+* Using the csv output of pdf-parser, usefully parse the data out of the 
 
 Note: tabula requires java
 
-## `color-csv-parser.py`
-
-WIP
-
-Using the csv output of pdf-parser, usefully parse the data into our context
+Results in mappings.json
 
