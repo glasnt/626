@@ -31,3 +31,19 @@ Note: tabula requires java
 
 Results in mappings.json
 
+
+## Consolidate into a palette format.
+
+Convert the CSV and Mappings into one nice format
+
+What makes a good palette format?
+ 
+ * The Thread Type (normally as the file name)
+ * For each thread: 
+  * The Manufacturer Code
+  * The Descriptive Name
+  * The Hex Code
+
+The Descriptive Name is optional, strictly, as not all manufacturers have names. But it's useful for debugging later (greyscale!) 
+
+
