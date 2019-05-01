@@ -1,3 +1,7 @@
+# Scratch space
+
+Mostly a mirror of sample code presented in ["A Right Stitch Up"](https://us.pycon.org/2019/schedule/presentation/229/), with more explanation. 
+
 ## `avg_color.py`
 
 Using a sample image, get the average color. 
@@ -44,6 +48,16 @@ What makes a good palette format?
   * The Descriptive Name
   * The Hex Code
 
-The Descriptive Name is optional, strictly, as not all manufacturers have names. But it's useful for debugging later (greyscale!) 
+Descriptive names are optional, therefore, there is just CODE and HEX
 
+Given this simplicity, all palettes are now CSV files, comma seperated CODE,HEX. 
 
+## paletteplot.py
+
+A ipython notebook of the visualisation of palettes (note: inline copy of data for ease of notebook)
+
+## reduce-flat-colours.py
+
+Given a palette of CODE,NAME reduce it to only 256 values, removing one of each to the closest palette pairs.
+
+Uses `delta_ciede2000` to determine colour distance

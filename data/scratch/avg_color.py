@@ -1,15 +1,9 @@
-from PIL import Image
+from PIL import Image, ImageStat
 import sys
 
 def avg_color(im):
-    count, r, g, b = [0,0,0,0]
-    for x in range(0, im.width):
-        for y in range(0, im.height):
-            r1, g1, b1 = im.getpixel((x, y))
-            r += r1; g += g1; b += b1
-            count += 1
-
-    return int(r/count), int(g/count), int(b/count)
+    stats = ImageStat.Stat(im)
+    return tuple(stats.median)
 
 fn = sys.argv[1]
 im = Image.open(fn)
