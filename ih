@@ -29,7 +29,7 @@ def recolor(origimage, PALETTE, colorlimit):
         bg.paste(origimage, mask=alpha)
         origimage = bg
 
-    palettedata = sum([x['RGB'] for x in PALETTE], [])[:256] ## NOTE Pillow Limitation
+    palettedata = sum([x['RGB'] for x in PALETTE], [])[:256 *3] ## NOTE Pillow Limitation
 
     palimage = Image.new('P', (16, 16))
     palimage.putpalette(palettedata)
